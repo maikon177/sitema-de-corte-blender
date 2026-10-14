@@ -1,0 +1,12 @@
+venv/
+__pycache__/
+*.pyc
+.env
+.env.bak
+.env.bak*
+build/
+local.properties
+pagina/
+*.log
+.claude/
+*.blend
