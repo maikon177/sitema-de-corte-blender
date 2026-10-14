@@ -1,0 +1,106 @@
+Create a full-body 1/2-scale collectible statue of the EXACT character shown in the reference image.
+
+REFERENCE FIDELITY — VERY IMPORTANT:
+Use the reference image as the absolute source for the character.
+If the reference contains more than one person, a background scene, or other elements, sculpt ONLY the single MAIN foreground character (the clear subject) and completely ignore everyone and everything else in the image.
+Keep the character's EXACT pose, gesture, head angle, body orientation, hand positions and any object held in the hands (phone, pole, etc.) identical to the reference — do NOT give the character a new "clean figure" standing pose.
+Keep every clothing item EXACTLY as drawn — do not swap a skirt for shorts or change garments — and keep all accessories (backpack, belt, watch, tattoos, straps, items in hands).
+Do NOT redesign, reinterpret, modernize, humanize, simplify, or change the character.
+
+COMPLETE FULL-BODY STATUE — MANDATORY:
+The reference may show only part of the character (a bust, a close-up, waist-up, or any cropped framing). Regardless of how much is visible, you MUST sculpt a COMPLETE, whole, FULL-BODY statue standing on both feet on the base.
+Reconstruct ALL missing parts naturally and consistently with the visible part and the character's canonical design: the full torso, hips, legs, feet, and any object or prop that is cut off by the reference edge.
+NEVER output a half statue, a bust, or a figure that ends in a flat horizontal cut or a cropped stump. The statue must have a natural complete lower body and feet resting on the base — no part may look sliced off or missing.
+If an object/prop is partially shown in the reference, model it whole (complete the missing portion).
+
+Preserve exactly:
+- the character's original cartoon proportions
+- body shape and anatomy
+- face and facial features
+- head angle
+- facial expression
+- hair shape
+- beak shape
+- eyes
+- clothing design
+- costume details
+- colors
+- belt
+- gloves
+- hands and fingers
+- leg position
+- foot position
+- overall silhouette
+- exact pose and gesture
+
+The ONLY major transformation should be converting the 2D illustrated character into a REAL PHYSICAL 3D COLLECTIBLE STATUE.
+
+3D STATUE — CRITICAL:
+Imagine the exact character from the reference was professionally sculpted as a physical resin/PVC collectible statue and then photographed in a studio.
+The final image MUST look like a photograph of an ACTUAL physical 3D statue.
+The entire character must have real three-dimensional volume, depth and physical thickness.
+Hair, feathers, beak, eyes, clothing, gloves, hands, fingers, belt, pants, shoes and every other visible element must be physically modeled and sculpted in 3D.
+Any detail that appears flat or drawn in the original reference must be converted into physical sculpted geometry with real depth.
+Clothing folds must have real volume.
+Hair must have real sculpted depth.
+The body must have rounded three-dimensional forms.
+Overlapping parts must create real physical shadows and contact points.
+DO NOT leave any part looking like a 2D drawing painted onto a flat surface.
+DO NOT create a flat illustration.
+DO NOT create concept art.
+DO NOT create a character sheet.
+DO NOT create a digital 2D painting.
+DO NOT create a video-game character render.
+DO NOT make the character look like a human wearing a costume.
+It must remain the SAME stylized cartoon character from the reference, simply transformed into a professionally manufactured 3D collectible statue.
+
+MATERIAL:
+Physical matte-painted resin/PVC collectible statue.
+Smooth manufactured surfaces with subtle real-world material texture.
+Matte painted finish.
+Soft realistic reflections appropriate for painted PVC/resin.
+The character should look like a physical toy/statue that could actually be picked up and placed on a desk.
+
+POSE:
+STRICTLY maintain the exact pose, gesture, head angle, body orientation and expression from the reference.
+Do not change the upper body.
+Do not create a new action pose.
+Do not make the character more dynamic than the original reference.
+If the reference is cropped, reconstruct the ENTIRE missing body (down to the feet) and any cut-off prop naturally, while keeping the existing visible posture and silhouette consistent with the reference. The result is always a complete full-body figure, never a cropped or half statue.
+
+BASE AND ENVIRONMENT:
+Place the physical statue on a transparent acrylic display base with no text or logo.
+Place the base on an elegant simple desk made of light natural wood, muted oak or soft walnut.
+
+BACKGROUND:
+Dreamy dark magical night-sky background.
+Deep navy blue with a subtle gradient, soft atmospheric glow and clean premium studio appearance.
+Slightly whimsical fantasy atmosphere, but do not let the background distract from the statue.
+
+LIGHTING:
+Professional collectible statue product photography.
+Soft studio lighting.
+Gentle highlights.
+Subtle rim light.
+Natural contact shadows.
+Ambient occlusion between physically touching parts.
+Lighting must clearly reveal the 3D volume, sculpted depth and physical thickness of the statue.
+
+CAMERA AND COMPOSITION:
+Camera positioned approximately at toy level.
+Natural product photography perspective.
+Character centered.
+Vertical 4:5 composition suitable for Instagram.
+Show the COMPLETE statue from the top of the head to the bottom of the acrylic base.
+Do not crop the hair, head, hands, legs, feet or base.
+Leave comfortable margins around the statue.
+The statue should occupy approximately 70-85% of the image.
+
+FINAL PRIORITY:
+Character accuracy comes first.
+3D physical statue appearance comes second.
+Environment and background come third.
+The final result must look like:
+"the exact character from the reference, physically sculpted and manufactured as a resin/PVC collectible statue, then professionally photographed on a desk."
+NOT:
+"the character redrawn as a 3D-looking illustration."

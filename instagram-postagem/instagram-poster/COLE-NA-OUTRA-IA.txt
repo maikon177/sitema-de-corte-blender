@@ -1,0 +1,57 @@
+CONTEXTO DO SISTEMA DE AUTO-POSTAGEM NO INSTAGRAM (Pata3D)
+(cole isto inteiro para a IA se situar — ela NÃO precisa mais me perguntar o básico)
+
+== O QUE É ==
+Programa em Python que posta sozinho no Instagram (feed + stories), com legenda
+gerada por IA. Já está instalado e rodando numa VPS. Usa a API OFICIAL do
+Instagram (Graph API) — não é login/senha, é token de acesso.
+
+== COMO FUNCIONA (a cada execução) ==
+Para cada conta ativa, ele pega 1 foto da fila e:
+1. Edita a imagem para feed e para stories (Pillow)                 -> editor.py
+2. Gera a legenda com Google Gemini, analisando a imagem            -> legenda.py
+3. Sobe a imagem no ImgBB para ter uma URL pública                  -> uploader.py
+4. Posta no feed + stories pela Graph API (cria container, publica) -> instagram.py
+5. Salva métricas em dados/historico.json e move a foto p/ publicadas/ -> main.py
+Roda 1 foto por conta por execução. Arquivo principal: main.py
+  - python main.py              -> posta
+  - python main.py --so-analise -> só métricas, não posta
+
+== ONDE FICA ==
+- Código (PC):   E:\disco D\intagram postagem\instagram-poster
+- Deploy (VPS):  /srv/instagram-poster  (venv em /srv/instagram-poster/venv, dono: webapps)
+- Config/chaves: /srv/instagram-poster/.env   (e cópia no PC, na pasta do código)
+- Fila de fotos: fotos/<pasta_da_conta>/      Postadas: publicadas/<pasta_da_conta>/
+
+== ACESSO AO SERVIDOR (VPS Hostinger, Ubuntu) ==
+IP SEU_IP_DA_VPS  | usuário root | chave SSH: CAMINHO_DA_CHAVE_SSH
+ssh -i "CAMINHO_DA_CHAVE_SSH" root@SEU_IP_DA_VPS
+
+== APIS/CHAVES QUE PRECISA (ficam no .env; valores NÃO estão aqui por segurança) ==
+- Instagram Graph API -> variáveis: IG_USER_ID_1, IG_ACCESS_TOKEN_1, IG_USER_ID_2, IG_ACCESS_TOKEN_2
+    (token da Meta: developers.facebook.com -> app -> Instagram -> gerar token longo ~60 dias)
+- Google Gemini       -> variável:  GEMINI_API_KEY   (pegar em https://aistudio.google.com/apikey)
+- ImgBB (host imagem) -> variável:  IMGBB_API_KEY    (pegar em https://api.imgbb.com)
+Outras: CONTAS_ATIVAS (1, 2 ou 1,2), IG_PASTA_1/_2 (pasta em fotos/), IG_NICHO_1/_2,
+        NOME_MARCA, IDIOMA_LEGENDA.
+Dependências Python: pillow, google-genai (SDK NOVO, "from google import genai"), requests, python-dotenv.
+
+== STATUS ATUAL ==
+- Instalado e testado na VPS. Agendamento systemd criado: 1x/dia às 10:00 (Brasília), mas DESLIGADO.
+- BLOQUEIO: os 2 tokens do Instagram estão MORTOS (conta 1: senha trocada; conta 2: expirou 06/jul/2026).
+- Fila: pata3d_cortadores tem 16 fotos prontas; pata3d_artesanato tem 0.
+- FALTA: gerar tokens novos -> por no .env -> ligar o agendamento.
+
+== COMANDOS NA VPS ==
+Editar chaves:        nano /srv/instagram-poster/.env
+Ligar agendamento:    systemctl enable --now instagram-poster.timer
+Desligar:             systemctl disable --now instagram-poster.timer
+Postar agora (manual):sudo -u webapps /srv/instagram-poster/venv/bin/python /srv/instagram-poster/main.py
+Ver logs:             journalctl -u instagram-poster.service -n 50 --no-pager
+Timer/horário:        /etc/systemd/system/instagram-poster.timer (OnCalendar=*-*-* 13:00:00 UTC = 10:00 BRT)
+
+== DOCUMENTO COMPLETO ==
+HANDOFF-INSTAGRAM-POSTER.md (na mesma pasta do código, na VPS, e no Cofre: "📸 Auto-Poster Instagram.md")
+
+TAREFA QUE EU (usuário) QUERO: [escreva aqui o que você quer, ex.:
+"me guiar para gerar os tokens novos do Instagram e ligar o agendamento"]

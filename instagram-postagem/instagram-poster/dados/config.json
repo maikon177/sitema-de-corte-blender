@@ -1,0 +1,30 @@
+{
+  "regras": {
+    "maxPorDia": 2,
+    "horarios": [
+      "09:10",
+      "14:00",
+      "18:30",
+      "20:00"
+    ],
+    "bloqueioRepeticao": true,
+    "alertaEstoqueDias": 7
+  },
+  "contas": {
+    "pata3d_artesanato": {
+      "pipeline": "simples",
+      "iaLegenda": "gemini",
+      "iaImagem": ""
+    },
+    "pata3d_cortadores": {
+      "pipeline": "simples",
+      "iaLegenda": "gemini",
+      "iaImagem": ""
+    },
+    "estante_imaginaria": {
+      "pipeline": "ia",
+      "iaLegenda": "gemini",
+      "iaImagem": "grok"
+    }
+  }
+}
