@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gerador 3D — Pata3D</title>
+<style>
+  :root{ --bg:#0e0e14; --card:#1b1b26; --line:#2a2a3a; --text:#f2f2f7; --muted:#9a9aa8; --roxo:#8b5cf6; --ok:#3fb984; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:Inter,system-ui,Arial,sans-serif; }
+  .wrap{ max-width:520px; margin:0 auto; padding:20px 16px 60px; }
+  h1{ font-size:24px; margin:4px 0 2px; }
+  .sub{ color:var(--muted); font-size:13px; margin-bottom:18px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px; margin-bottom:14px; }
+  .drop{ border:2px dashed var(--line); border-radius:14px; padding:26px 14px; text-align:center; cursor:pointer; transition:.15s; }
+  .drop:hover,.drop.over{ border-color:var(--roxo); background:#20202e; }
+  .drop svg{ opacity:.8; }
+  .preview{ width:100%; border-radius:12px; margin-top:12px; display:block; }
+  label.lab{ display:block; font-size:12px; color:var(--muted); margin:14px 0 6px; }
+  select{ width:100%; padding:11px 12px; border-radius:10px; background:#12121a; color:var(--text); border:1px solid var(--line); font-size:14px; }
+  .btn{ width:100%; padding:14px; border:none; border-radius:12px; font-size:15px; font-weight:700; cursor:pointer; margin-top:16px; color:#fff;
+        background:linear-gradient(135deg,#8b5cf6,#6d28d9); }
+  .btn:disabled{ opacity:.55; cursor:not-allowed; }
+  .btn.sec{ background:#262633; }
+  .muted{ color:var(--muted); font-size:12px; }
+  .center{ text-align:center; }
+  .spin{ width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--roxo);border-radius:50%;animation:r 1s linear infinite;margin:0 auto 10px; }
+  @keyframes r{ to{ transform:rotate(360deg);} }
+  .res-img{ width:100%; border-radius:14px; }
+  .row{ display:flex; gap:10px; }
+  .row .btn{ flex:1; }
+  .err{ color:#ff8a8a; font-size:13px; margin-top:10px; }
+  a.dl{ text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Gerador 3D</h1>
+  <div class="sub">Solte uma imagem 2D (personagem/desenho) e gere a estátua colecionável.</div>
+
+  <div id="step-upload" class="card">
+    <div id="drop" class="drop">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+      <div style="margin-top:8px">Toque ou arraste a imagem aqui</div>
+      <div class="muted" style="margin-top:4px">jpg, png ou webp</div>
+    </div>
+    <input id="file" type="file" accept="image/*" style="display:none" />
+    <img id="preview" class="preview" style="display:none" />
+
+    <label class="lab">Modelo que vai gerar</label>
+    <select id="engine">
+      <optgroup label="Gemini (rápido)">
+        <option value="gemini-3.1-flash-image" selected>Gemini Flash 3.1 — leve, ótimo custo · recomendado</option>
+        <option value="gemini-3.1-flash-lite-image">Gemini Flash Lite — mais leve ainda</option>
+        <option value="gemini-3-pro-image">Gemini Pro — máxima qualidade (mais caro)</option>
+        <option value="gemini-2.5-flash-image">Gemini Flash 2.5 — antigo (mais fraco)</option>
+      </optgroup>
+      <optgroup label="Qwen (barato, porém lento ~2–3 min)">
+        <option value="qwen-image-3.0-pro">Qwen Image 3.0 Pro — bom e barato</option>
+        <option value="wan2.7-image">Wan 2.7 — mais rápido que o Pro</option>
+        <option value="wan2.7-image-pro">Wan 2.7 Pro — alta resolução</option>
+      </optgroup>
+    </select>
+
+    <button id="gerar" class="btn" disabled>Gerar estátua 3D</button>
+    <div id="erro" class="err" style="display:none"></div>
+  </div>
+
+  <div id="step-loading" class="card center" style="display:none">
+    <div class="spin"></div>
+    <div id="loadtxt">Gerando…</div>
+    <div class="muted" id="loadsub" style="margin-top:6px"></div>
+  </div>
+
+  <div id="step-result" class="card" style="display:none">
+    <img id="resimg" class="res-img" />
+    <div class="row" style="margin-top:14px">
+      <a id="baixar" class="dl" download><button class="btn">Baixar</button></a>
+      <button id="outra" class="btn sec">Gerar outra</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  let arquivo = null;
+
+  const drop = $("drop"), file = $("file"), preview = $("preview");
+  drop.addEventListener("click", () => file.click());
+  ["dragenter","dragover"].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.add("over"); }));
+  ["dragleave","drop"].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.remove("over"); }));
+  drop.addEventListener("drop", ev => { if (ev.dataTransfer.files[0]) setArquivo(ev.dataTransfer.files[0]); });
+  file.addEventListener("change", () => { if (file.files[0]) setArquivo(file.files[0]); });
+
+  function setArquivo(f){
+    arquivo = f;
+    const url = URL.createObjectURL(f);
+    preview.src = url; preview.style.display = "block";
+    drop.style.display = "none";
+    $("gerar").disabled = false;
+    $("erro").style.display = "none";
+  }
+
+  $("gerar").addEventListener("click", gerar);
+  async function gerar(){
+    if (!arquivo) return;
+    const modelo = $("engine").value;
+    const lento = /qwen|wan/.test(modelo);
+    $("step-upload").style.display = "none";
+    $("step-loading").style.display = "block";
+    $("loadtxt").textContent = lento ? "Gerando com Qwen…" : "Gerando com Gemini…";
+    $("loadsub").textContent = lento ? "Pode levar 2–3 minutos. Não feche a página." : "Leva uns 30 segundos.";
+
+    const fd = new FormData();
+    fd.append("foto", arquivo);
+    fd.append("modelo", modelo);
+    fd.append("engine", lento ? "qwen" : "gemini");
+    try{
+      const r = await fetch("/api/gerar3d", { method:"POST", body: fd });
+      if(!r.ok){ throw new Error((await r.text()).slice(0,160) || ("HTTP "+r.status)); }
+      const j = await r.json();
+      $("resimg").src = j.url;
+      $("baixar").href = j.url;
+      $("baixar").setAttribute("download", j.arquivo || "estatua3d.png");
+      $("step-loading").style.display = "none";
+      $("step-result").style.display = "block";
+    }catch(e){
+      $("step-loading").style.display = "none";
+      $("step-upload").style.display = "block";
+      $("erro").style.display = "block";
+      $("erro").textContent = "Não consegui gerar: " + e.message;
+    }
+  }
+
+  $("outra").addEventListener("click", () => {
+    arquivo = null; file.value = "";
+    preview.style.display = "none"; drop.style.display = "block";
+    $("gerar").disabled = true;
+    $("step-result").style.display = "none";
+    $("step-upload").style.display = "block";
+  });
+</script>
+</body>
+</html>

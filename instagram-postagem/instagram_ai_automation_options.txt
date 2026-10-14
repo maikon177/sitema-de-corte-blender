@@ -1,0 +1,56 @@
+
+Aqui está um panorama das principais soluções **open source** e projetos “agent AI” que encontrei – avaliando recursos, suporte a múltiplas contas, automação/IA e maturidade. Baseei‑me em documentação oficial e guias comparativos recentes para garantir dados atualizados.
+
+## Principais candidatos
+
+### Riona AI Agent
+- **Descrição:** projeto em Node.js/TypeScript que combina automação via navegador, geração de conteúdo com IA (Gemini) e agendamento. Segundo o README, é um “plataforma de automação social com IA” que junta login, postagem, curtidas, comentários, mensagens e scraping de seguidoreshttps://github.com/David-patrick-chuks/Riona-AI-Agent#:~:text=Riona%20AI%20Agent%20is%20an,media%20operator%20from%20one%20codebase.  Também inclui geração de legendas/comentários com Gemini e suporte a múltiplas contas/perfishttps://github.com/David-patrick-chuks/Riona-AI-Agent#:~:text=,and%20utility%20scripts%20for%20operations.
+- **Recursos:** agenda posts, executa interações (seguir/curtir/comentar), gera conteúdo com IA, possui backend com MongoDB para logs e controle de taxa. Permite rodar em loop com intervalo configurávelhttps://github.com/David-patrick-chuks/Riona-AI-Agent#:~:text=,loop%20automatically%20IG_AGENT_ENABLED%3Dfalse%20IG_AGENT_INTERVAL_MS%3D30000.
+- **Prós:** muito completo para Instagram e Twitter (em desenvolvimento); suporte a múltiplas contas; código ativo com >4 mil estrelas (indicando comunidade grande); analytics básicos.
+- **Contras:** exige configuração de servidor, API keys e MongoDB; usa API não‑oficial do Instagram (risco de banimento); várias issues abertas (relatos de erros de inicialização de navegador e bloqueios) mostrando que ainda é instável; requer habilidades técnicas.
+
+### Mixpost
+- **Descrição:** ferramenta self‑hosted paga uma vez para gerenciamento de redes sociais. O guia do Postiz destaca que o Mixpost é um “agendador de mídia social de código aberto e auto‑hospedado” que permite criar, agendar e gerenciar conteúdo em diversas plataformas com controle total dos dadoshttps://postiz.com/blog/open-source-social-media-scheduler#:~:text=Mixpost%20offers%20a%20refreshing%20approach,party%20tools.
+- **Recursos:** suporta várias redes (Facebook, Instagram, Threads, Mastodon, X etc.); dispõe de biblioteca de mídia centralizada, suporte multilíngue e analytics avançadoshttps://postiz.com/blog/open-source-social-media-scheduler#:~:text=Key%20Features%20%26%20Considerations.
+- **Prós:** não há cobrança recorrente; interface amigável; suporta inúmeras contas e redes; ferramentas de análise robustas; estáveis para pequenas agências.
+- **Contras:** não inclui IA de geração de conteúdo; precisa de servidor e configuração técnica inicialhttps://postiz.com/blog/open-source-social-media-scheduler#:~:text=Key%20Features%20%26%20Considerations.
+
+### Postiz (social‑scheduler open source)
+- **Descrição:** ferramenta open source que combina IA para criar conteúdo com agendamento colaborativo. O guia destaca que o Postiz se posiciona como “agendador open source com IA” para equipes que precisam de automação avançada sem custos altoshttps://postiz.com/blog/open-source-social-media-scheduler#:~:text=11.
+- **Recursos:** geração de texto e imagens com IA; publicação automática, curtidas e comentários automáticos ("auto actions") em resposta a gatilhos; calendário visual; analytics; colaboração em equipehttps://postiz.com/blog/open-source-social-media-scheduler#:~:text=Key%20Features%20%26%20Considerations.
+- **Prós:** IA integrada torna a criação e programação de posts mais rápida; suporta várias redes; boa para equipes; interface moderna.
+- **Contras:** auto‑hospedado – precisa de infraestrutura e manutenção; projeto ainda jovem (menor base de usuários), podendo haver bugs.
+
+### Socioboard
+- **Descrição:** plataforma open source consagrada para gerenciamento de redes. O repositório explica que a Socioboard Core permite “monitorar e gerenciar múltiplas contas sociais e criar relatórios útis”https://github.com/socioboard/Socioboard-5.0#:~:text=Socioboard%20Core%20,. Possui versões web e mobile.
+- **Recursos:** dashboards para contas múltiplas, relatórios detalhados e automação de publicações; colaboração em equipe; envio automático de relatórios por e‑mailhttps://github.com/socioboard/Socioboard-5.0#:~:text=,accounts%20made%20easy.
+- **Prós:** maduro e estável (mais de 1 k estrela); suporta diversas redes; personalizável via plugins; inclui analytics e geração de relatórios.
+- **Contras:** não possui geração de conteúdo com IA; instalação e manutenção exigem conhecimento técnico; interface mais antiga.
+
+### AI Posting Agent for Instagram (NP5555)
+- **Descrição:** script Node.js simples que gera posts automaticamente usando Gemini AI e fotos do Unsplashhttps://github.com/NP5555/AI-Posting-Agent-for-Instagram#:~:text=Instagram%20AI%20Posting%20Agent.
+- **Recursos:** cria legendas e hashtags com IA, busca imagens, redimensiona e agenda postshttps://github.com/NP5555/AI-Posting-Agent-for-Instagram#:~:text=%2A%20AI,Topic%20rotation%20from%20customizable%20list.
+- **Prós:** código leve e fácil de rodar; bom para experimentação.
+- **Contras:** usa API privada (risco de ban); não suporta múltiplas contas nem análise de desempenho; comunidade reduzida.
+
+## Comparação resumida
+
+Projeto/Tool             | Multi‑contas | IA p/ conteúdo | Agendamento/Automção | Analytics | Complexidade/bugs | Comentários
+-------------------------|--------------|----------------|----------------------|-----------|-------------------|-------------
+**Riona AI Agent**      | Sim (multi‑perfil)https://github.com/David-patrick-chuks/Riona-AI-Agent#:~:text=,and%20utility%20scripts%20for%20operations | Gemini para legendas/comentárioshttps://github.com/David-patrick-chuks/Riona-AI-Agent#:~:text=,YouTube%2C%20audio%2C%20files%2C%20and%20websites | Login/curtir/comentar/postar/schedule via agentehttps://github.com/David-patrick-chuks/Riona-AI-Agent#:~:text=Riona%20AI%20Agent%20is%20an,media%20operator%20from%20one%20codebase | Básico (MongoDB) | Alta (requer configurar servidor; issues de estabilidade) | Melhor opção para automação completa, mas exige cuidados e riscos com API não oficial
+**Mixpost**             | Sim | Não (foco em planejamento) | Agendamento de posts em várias redeshttps://postiz.com/blog/open-source-social-media-scheduler#:~:text=Mixpost%20offers%20a%20refreshing%20approach,party%20tools | Avançadohttps://postiz.com/blog/open-source-social-media-scheduler#:~:text=Key%20Features%20%26%20Considerations | Moderada (setup inicial) | Ideal para quem quer controle total e analytics sem IA
+**Postiz (scheduler)**  | Sim | IA (texto/imagem)https://postiz.com/blog/open-source-social-media-scheduler#:~:text=Key%20Features%20%26%20Considerations | Auto‑post/like/comment e calendário visualhttps://postiz.com/blog/open-source-social-media-scheduler#:~:text=Key%20Features%20%26%20Considerations | Simhttps://postiz.com/blog/open-source-social-media-scheduler#:~:text=11 | Moderada (auto‑hospedado; projeto novo) | Boa para equipes; combina IA e colaboração; pode ter bugs pela imaturidade
+**Socioboard**          | Simhttps://github.com/socioboard/Socioboard-5.0#:~:text=Socioboard%20Core%20, | Não | Agendamento e gestão com relatórioshttps://github.com/socioboard/Socioboard-5.0#:~:text=,accounts%20made%20easy | Detalhadohttps://github.com/socioboard/Socioboard-5.0#:~:text=,accounts%20made%20easy | Moderada (setup técnico) | Ferramenta consolidada; sem IA; ideal para empresas que priorizam relatórios
+**AI Posting Agent**    | Não (single account) | Sim (Gemini)https://github.com/NP5555/AI-Posting-Agent-for-Instagram#:~:text=%2A%20AI,Topic%20rotation%20from%20customizable%20list | Programação simpleshttps://github.com/NP5555/AI-Posting-Agent-for-Instagram#:~:text=%2A%20AI,Topic%20rotation%20from%20customizable%20list | Não | Baixa (simples script) | Útil para testes; não atende multi‑conta ou análise
+
+## Considerações finais
+
+- **Para controlar dois perfis, gerar conteúdo com IA e ajustar a estratégia automaticamente**, o **Riona AI Agent** é o candidato mais alinhado: ele suporta várias contas, gera legendas com Gemini e inclui um loop de interações. Contudo, requer configuração complexa, uso de API não‑oficial e pode apresentar bugs; portanto, é indicado para usuários com experiência em servidores e automação e dispostos a assumir riscos.
+
+- **Se a prioridade é estabilidade, várias contas e analytics robustos**, mas você já tem as imagens preparadas e não precisa de IA para criá‑las, **Mixpost** ou **Socioboard** oferecem agendamento sólido e relatórios detalhados. Ambos exigem instalação própria; Mixpost tem interface mais moderna e custo único, enquanto Socioboard é mais maduro e flexível.
+
+- **Postiz** equilibra IA e colaboração, oferecendo auto‑postagens, curtidas e comentários automáticos e analytics. É promissor para equipes, mas por ser recente pode carecer da estabilidade de ferramentas mais antigas.
+
+- **Projetos menores** como o **AI Posting Agent** servem para experimentar IA em posts individuais, mas não atendem requisitos de múltiplas contas ou análise de desempenho e usam APIs não‑oficiais.
+
+Em resumo, não existe uma ferramenta perfeita – a escolha depende de quanto você aceita de configuração e riscos versus o nível de automação desejado. Se precisar de algo robusto e simples, considere optar por plataformas comerciais (e.g., Hootsuite ou Buffer) com APIs oficiais; caso contrário, Riona AI Agent ou Postiz podem ser ajustados para rodar por algumas horas, definir postagens da semana e reaprender com o desempenho, desde que você gerencie a infraestrutura e monitore eventuais falhas.
